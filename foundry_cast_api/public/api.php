@@ -6,11 +6,18 @@ if (!file_exists($env_path)) {
     echo json_encode(["error" => ".env file not found. Create .env in project root."]);
     exit;
 }
-$env = parse_ini_file($env_path);
 
+$env = parse_ini_file($env_path, false, INI_SCANNER_RAW);
 $RPC = escapeshellarg($env['RPC_URL'] ?? 'http://127.0.0.1:8545');
 $PK = escapeshellarg($env['PRIVATE_KEY'] ?? '');
-$CONTRACT = escapeshellarg($env['CONTRACT'] ?? '');
+
+$CONTRACT = $env['CONTRACT'];
+// Parse CONTRACT into path and address
+$parts = explode("|", $CONTRACT);
+$contractPath = $parts[0];
+$CONTRACT = $parts[1] ?? null;
+
+//echo '<pre>';print_r($CONTRACT);echo '</pre>';die;
 
 $action = $_GET['action'] ?? null;
 
@@ -26,13 +33,13 @@ switch ($action) {
         break;
 
     case "balance":
-        $cmd = "cast call $CONTRACT \"balance()(uint256)\" --rpc-url $RPC 2>&1";
+        $cmd = "cast call $CONTRACT 'balance()(uint256)' --rpc-url $RPC 2>&1";
         break;
 
     case "withdraw":
         $amount = $_GET['amount'] ?? "1000000000000000000";
         $amount = escapeshellarg($amount);
-        $cmd = "cast send $CONTRACT \"withdraw(uint256)\" $amount --private-key $PK --rpc-url $RPC 2>&1";
+        $cmd = "cast send $CONTRACT 'withdraw(uint256)' $amount --private-key $PK --rpc-url $RPC 2>&1";
         break;
 
     default:

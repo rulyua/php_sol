@@ -32,7 +32,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['deploy'])) {
     exec($command, $output, $exitCode);
 
     // Save execution log
-    file_put_contents(__DIR__ . '/deploy_output.log', "COMMAND:\n$command\n\n" . implode("\n", $output));
+//    file_put_contents(__DIR__ . '/deploy_output.log', "COMMAND:\n$command\n\n" . implode("\n", $output));
 
     // Extract deployed address
     $address = "UNKNOWN";
