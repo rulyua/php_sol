@@ -1,0 +1,19 @@
+# Foundry
+out/
+cache/
+
+# Logs
+*/public/deploy_output.log
+
+# Secrets
+*/.env
+*/.env.bak
+
+# Dependencies
+vendor/
+node_modules/
+
+# Ignore system files
+.DS_Store
+Thumbs.db
+
