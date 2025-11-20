@@ -13,6 +13,7 @@ $env = parse_ini_file($envPath, false, INI_SCANNER_RAW);
 $privateKey  = $env['PRIVATE_KEY'] ?? null;
 $rpcUrl      = $env['RPC_URL'] ?? "http://127.0.0.1:8545";
 $foundryDir  = $env['FOUNDRY_PATH'] ?? __DIR__;
+//echo '<pre>';print_r($foundryDir);echo '</pre>';die;
 $contractRaw = $env['CONTRACT'] ?? null;
 
 if (!$privateKey || !$contractRaw) {
