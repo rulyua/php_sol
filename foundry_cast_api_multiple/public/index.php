@@ -7,8 +7,25 @@
 </head>
 <body class="p-4">
 
+<?php
+// Load accounts array
+$accounts = require __DIR__ . '/../accounts.php';
+?>
+
 <div class="container">
   <h2>Smart Contract Controls (cast proxy)</h2>
+
+  <!-- ACCOUNT DROPDOWN -->
+  <div class="mb-3">
+    <label for="accountSelect" class="form-label"><b>Select Account</b></label>
+    <select id="accountSelect" class="form-select">
+      <?php foreach ($accounts['accounts'] as $acc): ?>
+        <option value="<?= htmlspecialchars($acc['private_key']) ?>">
+          <?= htmlspecialchars($acc['index'] . '  ' . $acc['address']) ?>
+        </option>
+      <?php endforeach; ?>
+    </select>
+  </div>
 
   <div class="mb-3">
     <button id="send" class="btn btn-primary">Send 1 ETH to contract</button>
@@ -24,6 +41,10 @@
 function call(action, params) {
   params = params || {};
   params.action = action;
+
+  // include selected account in params
+  params.account = $('#accountSelect').val();
+
   $.get('api.php', params, function(res){
     try {
       var obj = (typeof res === 'string') ? JSON.parse(res) : res;

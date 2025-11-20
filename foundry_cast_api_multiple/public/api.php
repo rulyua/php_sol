@@ -1,6 +1,10 @@
 <?php
 header('Content-Type: application/json');
 
+$accounts = require __DIR__ . '/../accounts.php';
+
+echo '<pre>';print_r($accounts);echo '</pre>';die;
+
 $env_path = __DIR__ . '/../.env';
 if (!file_exists($env_path)) {
     echo json_encode(["error" => ".env file not found. Create .env in project root."]);
@@ -10,6 +14,8 @@ if (!file_exists($env_path)) {
 $env = parse_ini_file($env_path, false, INI_SCANNER_RAW);
 $RPC = escapeshellarg($env['RPC_URL'] ?? 'http://127.0.0.1:8545');
 $PK = escapeshellarg($env['PRIVATE_KEY'] ?? '');
+
+$PK = $_GET['account'] ?? null;
 
 $CONTRACT = $env['CONTRACT'];
 // Parse CONTRACT into path and address

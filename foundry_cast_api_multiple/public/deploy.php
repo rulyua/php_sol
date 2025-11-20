@@ -1,6 +1,25 @@
 <?php
-session_start();
+// Load accounts array
+$accounts = require __DIR__ . '/../accounts.php';
+?>
 
+<div class="container">
+  <h2>Smart Contract Controls (cast proxy)</h2>
+
+  <!-- ACCOUNT DROPDOWN -->
+  <div class="mb-3">
+    <label for="accountSelect" class="form-label"><b>Select Account</b></label>
+    <select id="accountSelect" class="form-select">
+      <?php foreach ($accounts['accounts'] as $acc): ?>
+        <option value="<?= htmlspecialchars($acc['private_key']) ?>">
+          <?= htmlspecialchars($acc['index'] . ' — ' . $acc['address']) ?>
+        </option>
+      <?php endforeach; ?>
+    </select>
+  </div>
+</div>
+
+<?php
 // ---- Load .env ----
 $envPath = __DIR__ . '/../.env'; // <-- updated path
 if (!file_exists($envPath)) {
