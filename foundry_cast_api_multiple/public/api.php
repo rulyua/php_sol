@@ -3,7 +3,7 @@ header('Content-Type: application/json');
 
 $accounts = require __DIR__ . '/../accounts.php';
 
-echo '<pre>';print_r($accounts);echo '</pre>';die;
+//echo '<pre>';print_r($accounts);echo '</pre>';die;
 
 $env_path = __DIR__ . '/../.env';
 if (!file_exists($env_path)) {
@@ -40,6 +40,10 @@ switch ($action) {
 
     case "balance":
         $cmd = "cast call $CONTRACT 'balance()(uint256)' --rpc-url $RPC 2>&1";
+        break;
+
+    case "account_balance":
+        $cmd = "cast call $CONTRACT 'account_balance()(uint256)' --rpc-url $RPC 2>&1";
         break;
 
     case "withdraw":

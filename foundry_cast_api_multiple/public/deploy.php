@@ -1,10 +1,10 @@
 <?php
-// Load accounts array
+session_start();
 $accounts = require __DIR__ . '/../accounts.php';
 ?>
 
 <div class="container">
-  <h2>Smart Contract Controls (cast proxy)</h2>
+  <h2>Smart Contracts Control</h2>
 
   <!-- ACCOUNT DROPDOWN -->
   <div class="mb-3">
@@ -17,9 +17,11 @@ $accounts = require __DIR__ . '/../accounts.php';
       <?php endforeach; ?>
     </select>
   </div>
+
 </div>
 
 <?php
+
 // ---- Load .env ----
 $envPath = __DIR__ . '/../.env'; // <-- updated path
 if (!file_exists($envPath)) {
