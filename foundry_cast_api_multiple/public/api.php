@@ -17,11 +17,14 @@ $PK = escapeshellarg($env['PRIVATE_KEY'] ?? '');
 
 $PK = $_GET['account'] ?? null;
 
-$CONTRACT = $env['CONTRACT'];
-// Parse CONTRACT into path and address
-$parts = explode("|", $CONTRACT);
-$contractPath = $parts[0];
-$CONTRACT = $parts[1] ?? null;
+//$CONTRACT = $env['CONTRACT'];
+//// Parse CONTRACT into path and address
+//$parts = explode("|", $CONTRACT);
+//$contractPath = $parts[0];
+//$CONTRACT = $parts[1] ?? null;
+
+$CONTRACT = $_GET['contract'] ?? null;
+$PK = $_GET['account'] ?? null;
 
 //echo '<pre>';print_r($CONTRACT);echo '</pre>';die;
 

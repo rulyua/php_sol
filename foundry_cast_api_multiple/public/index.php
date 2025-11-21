@@ -8,16 +8,18 @@
 <body class="p-4">
 
 <?php
-// Load accounts array
-$accounts = require __DIR__ . '/../accounts.php';
+// Load accounts + deployed contracts
+$accounts  = require __DIR__ . '/../accounts.php';
+$contracts = require __DIR__ . '/../contracts.php';
 ?>
 
 <div class="container">
   <h2>Smart Contract Controls (cast proxy)</h2>
 
+
   <!-- ACCOUNT DROPDOWN -->
   <div class="mb-3">
-    <label for="accountSelect" class="form-label"><b>Select Account</b></label>
+    <label class="form-label"><b>Select Account</b></label>
     <select id="accountSelect" class="form-select">
       <?php foreach ($accounts['accounts'] as $acc): ?>
         <option value="<?= htmlspecialchars($acc['private_key']) ?>">
@@ -27,24 +29,43 @@ $accounts = require __DIR__ . '/../accounts.php';
     </select>
   </div>
 
+
+  <!-- CONTRACT DROPDOWN -->
+  <div class="mb-3">
+    <label class="form-label"><b>Select Deployed Contract</b></label>
+    <select id="contractSelect" class="form-select">
+      <?php if (!empty($contracts['contracts'])): ?>
+          <?php foreach ($contracts['contracts'] as $con): ?>
+            <option value="<?= htmlspecialchars($con['address']) ?>">
+              <?= htmlspecialchars($con['name'] . '  ' . $con['address']) ?>
+            </option>
+          <?php endforeach; ?>
+      <?php else: ?>
+          <option disabled>No deployed contracts yet</option>
+      <?php endif; ?>
+    </select>
+  </div>
+
+
   <div class="mb-3">
     <button id="send" class="btn btn-primary">Send 1 ETH to contract</button>
     <button id="withdraw" class="btn btn-warning">Withdraw 1 ETH</button>
-    <button id="balance" class="btn btn-success">Contract Balance</button>
-    <button id="account_balance" class="btn btn-success">Account Balance</button>
+    <button id="balance" class="btn btn-success">Check Balance</button>
   </div>
 
   <pre id="output" class="mt-3 bg-dark text-light p-3 rounded"></pre>
 </div>
 
+
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 <script>
-function call(action, params) {
-  params = params || {};
-  params.action = action;
 
-  // include selected account in params
-  params.account = $('#accountSelect').val();
+function call(action) {
+  let params = {
+    action: action,
+    contract: $('#contractSelect').val(),
+    account: $('#accountSelect').val()
+  };
 
   $.get('api.php', params, function(res){
     try {
@@ -58,10 +79,10 @@ function call(action, params) {
   });
 }
 
-$('#send').click(function(){ call('sendEther'); });
-$('#withdraw').click(function(){ call('withdraw'); });
-$('#balance').click(function(){ call('balance'); });
-$('#account_balance').click(function(){ call('account_balance'); });
+$('#send').click(() => call('sendEther'));
+$('#withdraw').click(() => call('withdraw'));
+$('#balance').click(() => call('balance'));
+
 </script>
 </body>
 </html>
