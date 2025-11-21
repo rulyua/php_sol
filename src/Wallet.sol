@@ -18,4 +18,9 @@ contract Wallet {
     function balance() public view returns(uint256) {
         return address(this).balance;
     }
+
+		function account_balance() public view returns (uint256) {
+		    return msg.sender.balance;
+		}
+
 }
