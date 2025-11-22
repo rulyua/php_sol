@@ -16,5 +16,12 @@ return array (
       'deployer' => '0x70997970C51812dc3A010C7d01b50e0d17dc79C8',
       'timestamp' => 1763751331,
     ),
+    2 => 
+    array (
+      'name' => 'src/Wallet.sol:Wallet',
+      'address' => '0x663F3ad617193148711d28f5334eE4Ed07016602',
+      'deployer' => '0x3C44CdDdB6a900fa2b585dd299e03d12FA4293BC',
+      'timestamp' => 1763802114,
+    ),
   ),
 );

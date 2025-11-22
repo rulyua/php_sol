@@ -46,7 +46,7 @@ switch ($action) {
         break;
 
     case "account_balance":
-        $cmd = "cast call $CONTRACT 'account_balance()(uint256)' --rpc-url $RPC 2>&1";
+        $cmd = "cast balance $PK --rpc-url $RPC 2>&1";
         break;
 
     case "withdraw":

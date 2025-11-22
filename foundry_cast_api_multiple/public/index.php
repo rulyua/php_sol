@@ -37,7 +37,8 @@ $contracts = require __DIR__ . '/../contracts.php';
   <div class="mb-3">
     <button id="send" class="btn btn-primary">Send 1 ETH to contract</button>
     <button id="withdraw" class="btn btn-warning">Withdraw 1 ETH</button>
-    <button id="balance" class="btn btn-success">Check Balance</button>
+    <button id="balance" class="btn btn-success">Contract Balance</button>
+		<button id="account_balance" class="btn btn-success">Account Balance</button>
   </div>
 
   <pre id="output" class="mt-3 bg-dark text-light p-3 rounded"></pre>
@@ -95,9 +96,14 @@ $(document).ready(refreshContracts);
 // CALL BACKEND API
 // -------------------------
 function call(action) {
+	account = $('#accountSelect option:selected').data('private');
+  
+  if( action == 'account_balance' )
+  	account = $('#accountSelect option:selected').val();
+  
   let params = {
     action: action,
-    account: $('#accountSelect option:selected').data('private'),
+    account: account,
     contract: $('#contractSelect').val()
   };
 
@@ -120,6 +126,7 @@ function call(action) {
 $('#send').click(() => call('sendEther'));
 $('#withdraw').click(() => call('withdraw'));
 $('#balance').click(() => call('balance'));
+$('#account_balance').click(function(){ call('account_balance'); });
 </script>
 
 </body>

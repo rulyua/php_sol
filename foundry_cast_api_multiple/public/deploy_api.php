@@ -128,7 +128,7 @@ $accounts = require __DIR__ . '/../accounts.php';
         <div class="mb-3">
             <label for="contract_path" class="form-label"><b>Contract Path</b> (e.g. src/Wallet.sol:Wallet)</label>
             <input type="text" name="contract_path" id="contract_path"
-                   class="form-control" placeholder="src/Wallet.sol:Wallet" required>
+                   class="form-control" placeholder="src/Wallet.sol:Wallet" required value="src/Wallet.sol:Wallet">
         </div>
 
         <button type="submit" class="btn btn-primary">Deploy Contract</button>
