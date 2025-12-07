@@ -42,7 +42,7 @@ switch ($action) {
         break;
 
     case "balance":
-        $cmd = "cast call $CONTRACT 'balance()(uint256)' --rpc-url $RPC 2>&1";
+        $cmd = "cast balance $CONTRACT --rpc-url $RPC 2>&1";
         break;
 
     case "account_balance":
