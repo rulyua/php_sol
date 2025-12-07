@@ -1,6 +1,7 @@
 # Foundry
 out/
 cache/
+broadcast/
 
 # Logs
 */public/deploy_output.log
